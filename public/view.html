@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Antrian Saat Ini</title>
+	<script type="text/javascript">
+		var playlist = [];
+		function updateView(current, lastcall, lastloket){
+			document.getElementById('1').innerHTML=current[0];
+			document.getElementById('2').innerHTML=current[1];
+			document.getElementById('3').innerHTML=current[2];
+			document.getElementById('4').innerHTML=current[3];
+			document.getElementById('5').innerHTML=current[4];
+			document.getElementById('6').innerHTML=current[5];
+			document.getElementById('7').innerHTML=current[6];
+			document.getElementById('8').innerHTML=current[7];
+			document.getElementById('currentcall').innerHTML=lastcall;
+			document.getElementById('currentloket').innerHTML=lastloket;
+		}
+		function call(ind){
+		    var reqURL = '/assets/audio/'+playlist[ind]+'.mp3';
+			fetch(reqURL).then((response) => {
+		        if (response.ok) {
+		          response.blob().then((blob) => {
+		            const audioURL = window.URL.createObjectURL(blob);
+		            var msgAudio = document.createElement('audio');
+				    msgAudio.setAttribute('controls', true);
+				    msgAudio.setAttribute('autoplay', true);
+				    msgAudio.setAttribute('src', audioURL);
+				    msgAudio.setAttribute('type', 'audio/ogg;codecs=opus');
+				    msgAudio.setAttribute("style", "display: none;");
+				    document.body.appendChild(msgAudio);
+				    msgAudio.addEventListener("ended", function(){
+				    	if (ind<playlist.length-1) {
+				    		call(++ind);
+				    	}
+					});
+		          });
+		        } else {
+		          console.log(response);
+		        }
+		    })
+		}
+		setInterval(function (){
+			fetch('/api/cek', {method: 'GET'})
+			.then((res)=>res.json())
+			.then(function(res) {
+				// console.log(res);
+				updateView(res.current, res.lastcall, res.lastloket);
+				if(res.code==1){
+					fetch('/api/transcript/last', {method: 'GET'})
+					.then((res)=>res.json())
+					.then(function(res){
+						playlist=res.transcript;
+						$('#curr').transition('flash');
+						$('#cur').transition('flash');
+						call(0);
+					});
+				}
+				if(res.code==2){
+					fetch('/api/transcript/recall', {method: 'GET'})
+					.then((res)=>res.json())
+					.then(function(res){
+						playlist=res.transcript;
+						call(0);
+					});
+				}
+			}, 3000);
+		})
+	</script>
+	<script
+	  src="https://code.jquery.com/jquery-3.1.1.min.js"
+	  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+	  crossorigin="anonymous"></script>
+	<script src="/semantic/semantic.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/semantic/semantic.min.css">
+	<style type="text/css">
+		h1, h2, h3{
+			font-family: "Segoe UI";
+			margin: 0px;
+			font-weight: 400;
+		}
+
+		h1{
+			color: #006636;
+			font-size: 64px;
+			margin-bottom: 30px;
+		}
+
+		h3{
+			color: #666;
+			font-size: 24px;
+		}
+	</style>
+</head>
+<body style="background-image: url('/assets/images/body_bg.jpg'); background-size: 100% auto">
+	<div class="ui grid" style="height: 360px">
+		<div class="twelve wide column" style="padding: 0px; background-image: url('assets/images/headline_pure.jpg'); background-size: 100% auto">
+		</div>
+		<div class="center aligned four wide column" style="padding: 0px; background-image: url('assets/images/current_bg.jpg'); background-size: 100% auto">
+			<h1 id="curr" style="color: #fff; margin-top: 100px; margin-bottom: 25px"><i class="user icon"></i><i id="currentcall"></i></h1>
+			<h3 id="cur" style="color: #fff"><i>LOKET </i><i id="currentloket">-</i></h3>
+		</div>
+	</div>
+	<div class="ui container">
+		<div class="ui grid">
+			<div class="center aligned two wide column" style="padding-top: 50px">
+				<h1 id="1"></h1>
+				<h3><i>LOKET</i> <i style="color: #006636">1</i></h3>
+			</div>
+			<div class="center aligned two wide column" style="padding-top: 50px">
+				<h1 id="2"></h1>
+				<h3><i>LOKET</i> <i style="color: #006636">2</i></h3>
+			</div>
+			<div class="center aligned two wide column" style="padding-top: 50px">
+				<h1 id="3"></h1>
+				<h3><i>LOKET</i> <i style="color: #006636">3</i></h3>
+			</div>
+			<div class="center aligned two wide column" style="padding-top: 50px">
+				<h1 id="4"></h1>
+				<h3><i>LOKET</i> <i style="color: #006636">4</i></h3>
+			</div>
+			<div class="center aligned two wide column" style="padding-top: 50px">
+				<h1 id="5"></h1>
+				<h3><i>LOKET</i> <i style="color: #006636">5</i></h3>
+			</div>
+			<div class="center aligned two wide column" style="padding-top: 50px">
+				<h1 id="6"></h1>
+				<h3><i>LOKET</i> <i style="color: #006636">6</i></h3>
+			</div>
+			<div class="center aligned two wide column" style="padding-top: 50px">
+				<h1 id="7"></h1>
+				<h3><i>LOKET</i> <i style="color: #006636">7</i></h3>
+			</div>
+			<div class="center aligned two wide column" style="padding-top: 50px">
+				<h1 id="8"></h1>
+				<h3><i>LOKET</i> <i style="color: #006636">8</i></h3>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript"></script>
+</html>

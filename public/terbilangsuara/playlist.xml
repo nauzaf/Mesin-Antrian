@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xml>
+  <track>
+    <path>audio/antri.mp3</path>
+    <title>antri</title>
+  </track>
+  <track>
+    <path>audio/dua.mp3</path>
+    <title>dua</title>
+  </track>
+  <track>
+    <path>audio/belas.mp3</path>
+    <title>belas</title>
+  </track>
+  <track>
+    <path>audio/loket.mp3</path>
+    <title>loket</title>
+  </track>
+  <track>
+    <path>audio/stop.mp3</path>
+    <title>stop</title>
+  </track>
+</xml>

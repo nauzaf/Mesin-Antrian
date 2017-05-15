@@ -1,0 +1,17 @@
+{
+  "name": "antrian",
+  "version": "1.0.0",
+  "description": "Mesin Antrian Admisi UIN Sunan Kalijaga Yogyakarta",
+  "main": "server.js",
+  "scripts": {
+    "test": "server.js"
+  },
+  "author": "mfauzan.albaihaqi@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "exec-php": "0.0.3",
+    "express": "^4.15.2",
+    "fs": "0.0.1-security",
+    "mongodb": "^2.2.26"
+  }
+}
