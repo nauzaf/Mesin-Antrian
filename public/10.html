@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Loket 10</title>
+	<script type="text/javascript">
+		function next(loket){
+			fetch('/api/cek', {method: 'GET'})
+			.then((res)=>res.json())
+			.then(function(res) {
+				if (res.lastcall==res.queque) {
+					alert("Antrian Habis");
+				}
+				else{
+					fetch('/api/callnext/'+loket, {method: 'GET'})
+					.then((res)=>res.json())
+					.then(function(res){
+						document.getElementById('call').innerHTML=res.lastcall;
+					});
+				}
+			})
+		}
+		function recall(lok){
+			fetch('/api/cek', {method: 'GET'})
+			.then((res)=>res.json())
+			.then(function(res) {
+				if (res.current[9]==0) {
+					alert("Belum ada antrian");
+				}
+				else{
+					fetch('/api/recall/'+lok, {method: 'GET'})
+					.then((res)=>res.json())
+					.then(function(res){
+						console.log(res.msg);
+					});	
+				}
+			});
+		}
+	</script>
+	<script
+	  src="https://code.jquery.com/jquery-3.1.1.min.js"
+	  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+	  crossorigin="anonymous"></script>
+	<script src="/semantic/semantic.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/semantic/semantic.min.css">
+	<style type="text/css">
+		h1, h2, h3, h5{
+			font-family: "Segoe UI";
+			margin: 0px;
+			font-weight: 400;
+		}
+
+		h1{
+			color: #006636;
+			font-size: 64px;
+			margin-bottom: 30px;
+		}
+
+		h3{
+			color: #666;
+			font-size: 24px;
+		}
+	</style>
+</head>
+<body style="padding-top: 130px; background-image: url('/assets/images/body_bg.jpg'); background-size: 100% auto">
+	<center>
+		<div id="user_content">
+			<h2 style="margin-bottom: 0px; color: #006636">Nomor Antrian</h2>
+			<h1 id="call" style="font-size: 144px; margin-top: 0px"></h1>
+		</div>
+		<div class="ui massive buttons">
+			<button class="ui button" onclick="recall(10)">Recall</button>
+			<div class="or"></div>
+			<button class="ui positive button" onclick="next(10)">Next</button>
+		</div>
+		<h5 style="margin-top: 25px; color: #006636"><i>"Tekan tombol Recall untuk memanggil ulang antrian atau tombol Next untuk melanjutkan antrian"</i></h5>	
+	</center>
+</body>
+<script>
+	$(document).ready(function(){
+		$('#user_content').hide();
+		$('.ui.positive').click(function(){
+			$('#user_content').show(1000);
+		});
+	});
+</script>
+</html>

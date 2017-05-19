@@ -3,15 +3,17 @@ var app = express();
 var path = require('path');
 var execPhp = require('exec-php');
 var fs = require('fs');
+var jsonfile = require('jsonfile');
 var public = path.join(__dirname, '/public');
 var suoro = require('./audio');
+var backup = '/backup.json';
 
 var server = app.listen(8080, function(){
 	console.log("Aplication Running");
 });
 
 var queque = 0;
-var current = [0,0,0,0,0,0,0,0];
+var current = [0,0,0,0,0,0,0,0,0,0,0,0];
 var lastCall = 0;
 var lastLoket = 0;
 var code = 0;
@@ -57,6 +59,26 @@ app.get('/7', function (req, res) {
 
 app.get('/8', function (req, res) {
   res.sendFile(public+'/8.html');
+});
+
+app.get('/9', function (req, res) {
+  res.sendFile(public+'/9.html');
+});
+
+app.get('/10', function (req, res) {
+  res.sendFile(public+'/10.html');
+});
+
+app.get('/11', function (req, res) {
+  res.sendFile(public+'/11.html');
+});
+
+app.get('/12', function (req, res) {
+  res.sendFile(public+'/12.html');
+});
+
+app.get('/test', function (req, res) {
+  res.sendFile(public+'/test.html');
 });
 
 app.get('/api/recall/:loket',function(req, res){

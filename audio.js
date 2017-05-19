@@ -139,6 +139,18 @@ audio.terbilang = function( bilangan,  loket)
     else if (loket==8) {
         go="delapan"
     }
+    else if (loket==9) {
+        go="sembilan"
+    }
+    else if (loket==10) {
+        go="sepuluh"
+    }
+    else if (loket==11) {
+        go="sebelas"
+    }
+    else if (loket==12) {
+        go="duabelas"
+    }
 
     var transcript = ("bel antri "+kalimat+"loket "+go).trim().split(" ");
     transcript = cleanArray(transcript);

@@ -12,6 +12,7 @@
     "exec-php": "0.0.3",
     "express": "^4.15.2",
     "fs": "0.0.1-security",
+    "jsonfile": "^3.0.0",
     "mongodb": "^2.2.26"
   }
 }

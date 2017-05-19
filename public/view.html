@@ -13,11 +13,15 @@
 			document.getElementById('6').innerHTML=current[5];
 			document.getElementById('7').innerHTML=current[6];
 			document.getElementById('8').innerHTML=current[7];
+			document.getElementById('9').innerHTML=current[8];
+			document.getElementById('10').innerHTML=current[9];
+			document.getElementById('11').innerHTML=current[10];
+			document.getElementById('12').innerHTML=current[11];
 			document.getElementById('currentcall').innerHTML=lastcall;
 			document.getElementById('currentloket').innerHTML=lastloket;
 		}
 		function call(ind){
-		    var reqURL = '/assets/audio/'+playlist[ind]+'.mp3';
+		    var reqURL = '/assets/audio/mono/'+playlist[ind]+'.mp3';
 			fetch(reqURL).then((response) => {
 		        if (response.ok) {
 		          response.blob().then((blob) => {
@@ -66,6 +70,25 @@
 				}
 			}, 3000);
 		})
+
+		 function jam() {
+			  var e = document.getElementById('jam'),
+			  d = new Date(), h, m, s;
+			  h = d.getHours();
+			  m = set(d.getMinutes());
+			  s = set(d.getSeconds());
+
+			  e.innerHTML = h +':'+ m +':'+ s;
+
+			  setTimeout('jam()', 1000);
+		 }
+
+		 function set(e) {
+		  e = e < 10 ? '0'+ e : e;
+		  return e;
+		 }
+
+		 window.onload = function() { jam(); }
 	</script>
 	<script
 	  src="https://code.jquery.com/jquery-3.1.1.min.js"
@@ -93,47 +116,67 @@
 	</style>
 </head>
 <body style="background-image: url('/assets/images/body_bg.jpg'); background-size: 100% auto">
-	<div class="ui grid" style="height: 360px">
-		<div class="twelve wide column" style="padding: 0px; background-image: url('assets/images/headline_pure.jpg'); background-size: 100% auto">
-		</div>
-		<div class="center aligned four wide column" style="padding: 0px; background-image: url('assets/images/current_bg.jpg'); background-size: 100% auto">
-			<h1 id="curr" style="color: #fff; margin-top: 100px; margin-bottom: 25px"><i class="user icon"></i><i id="currentcall"></i></h1>
-			<h3 id="cur" style="color: #fff"><i>LOKET </i><i id="currentloket">-</i></h3>
+	<div style="height: 170px; background-image: url('assets/images/current_bg.jpg'); background-size: 100% auto">
+		<div class="ui container">
+			<div class="ui grid">
+				<div class="left aligned eight wide column">
+					<h1 id="curr" style="color: #fff; margin-top: 30px; margin-bottom: 25px"><i class="user icon"></i><i id="currentcall"></i> <i class="arrow right icon"></i> <i>LK </i><i id="currentloket">-</i> </h1>
+				</div>
+				<div class="right aligned eight wide column">
+					<h1 id="jam" style="color: #fff; margin-top: 30px"></h1>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="ui container">
 		<div class="ui grid">
-			<div class="center aligned two wide column" style="padding-top: 50px">
+			<div class="center aligned four wide column" style="padding-top: 40px">
 				<h1 id="1"></h1>
 				<h3><i>LOKET</i> <i style="color: #006636">1</i></h3>
 			</div>
-			<div class="center aligned two wide column" style="padding-top: 50px">
+			<div class="center aligned four wide column" style="padding-top: 40px">
 				<h1 id="2"></h1>
 				<h3><i>LOKET</i> <i style="color: #006636">2</i></h3>
 			</div>
-			<div class="center aligned two wide column" style="padding-top: 50px">
+			<div class="center aligned four wide column" style="padding-top: 40px">
 				<h1 id="3"></h1>
 				<h3><i>LOKET</i> <i style="color: #006636">3</i></h3>
 			</div>
-			<div class="center aligned two wide column" style="padding-top: 50px">
+			<div class="center aligned four wide column" style="padding-top: 40px">
 				<h1 id="4"></h1>
 				<h3><i>LOKET</i> <i style="color: #006636">4</i></h3>
 			</div>
-			<div class="center aligned two wide column" style="padding-top: 50px">
+			<div class="center aligned four wide column" style="padding-top: 40px">
 				<h1 id="5"></h1>
 				<h3><i>LOKET</i> <i style="color: #006636">5</i></h3>
 			</div>
-			<div class="center aligned two wide column" style="padding-top: 50px">
+			<div class="center aligned four wide column" style="padding-top: 40px">
 				<h1 id="6"></h1>
 				<h3><i>LOKET</i> <i style="color: #006636">6</i></h3>
 			</div>
-			<div class="center aligned two wide column" style="padding-top: 50px">
+			<div class="center aligned four wide column" style="padding-top: 40px">
 				<h1 id="7"></h1>
 				<h3><i>LOKET</i> <i style="color: #006636">7</i></h3>
 			</div>
-			<div class="center aligned two wide column" style="padding-top: 50px">
+			<div class="center aligned four wide column" style="padding-top: 40px">
 				<h1 id="8"></h1>
 				<h3><i>LOKET</i> <i style="color: #006636">8</i></h3>
+			</div>
+			<div class="center aligned four wide column" style="padding-top: 40px">
+				<h1 id="9"></h1>
+				<h3><i>LOKET</i> <i style="color: #006636">9</i></h3>
+			</div>
+			<div class="center aligned four wide column" style="padding-top: 40px">
+				<h1 id="10"></h1>
+				<h3><i>LOKET</i> <i style="color: #006636">10</i></h3>
+			</div>
+			<div class="center aligned four wide column" style="padding-top: 40px">
+				<h1 id="11"></h1>
+				<h3><i>LOKET</i> <i style="color: #006636">11</i></h3>
+			</div>
+			<div class="center aligned four wide column" style="padding-top: 40px">
+				<h1 id="12"></h1>
+				<h3><i>LOKET</i> <i style="color: #006636">12</i></h3>
 			</div>
 		</div>
 	</div>
